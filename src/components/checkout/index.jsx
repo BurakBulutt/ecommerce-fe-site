@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { BasketContext } from "../context/BasketContext";
 import { PaymentService } from "../../services/paymentservice/PaymentService";
 import { useFormik } from "formik";
@@ -37,7 +37,7 @@ const Checkout = () => {
           });
           setSubmitted(false);
           setTimeout(() => {
-            navigator("/");
+            navigator("/",{replace : true});
             getBasket();
           }, 4000);
         } else {
@@ -45,6 +45,8 @@ const Checkout = () => {
             position: "top-left",
             autoClose: 3000,
           });
+          navigator("/shop",{replace : true})
+          getBasket();
         }
       });
     },

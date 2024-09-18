@@ -39,12 +39,13 @@ export const BasketProvider = ({ children }) => {
         setBasket(response.data);
       }
     }).catch((error) => {
-      toast.error("Oturum Sırasında Hata Meydana Geldi",{
+      toast.error("Sunucu Hatası",{
         position : 'top-left',
         autoClose : 3000
       })
       Cookies.remove("token");
       setToken(undefined);
+      console.log(error);
     })
   }
 

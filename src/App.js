@@ -6,13 +6,14 @@ import Login from "./components/authentication/login";
 import Register from "./components/authentication/register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Shop from "./components/home";
+import Shop from "./components/shop";
 import Slider from "./components/home/slider/slider";
 import ProductPage from "./components/product/product-page";
 import { BasketProvider } from "./components/context/BasketContext";
 import Checkout from "./components/checkout";
 import OrderList from "./components/order/orderlist";
 import OrderSummary from "./components/order/ordersummary";
+import { Notifications } from "react-push-notification";
 
 const Layout = () => {
   return (
@@ -36,11 +37,15 @@ const App = () => {
           <Route path="products/:id" element={<ProductPage />} />
           <Route path="checkout" element={<Checkout />}></Route>
           <Route path="orders/my-orders/" element={<OrderList />}></Route>
-          <Route path="orders/my-orders/:code" element={<OrderSummary/>}></Route>
+          <Route
+            path="orders/my-orders/:code"
+            element={<OrderSummary />}
+          ></Route>
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Routes>
+      <Notifications />
       <ToastContainer />
     </BasketProvider>
   );

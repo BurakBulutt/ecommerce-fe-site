@@ -31,7 +31,7 @@ const Login = () => {
           Cookies.set("token", `Bearer ${token}`);
           setToken(Cookies.get("token"))
 
-          navigator("/");
+          navigator("/",{replace : true});
           setSubmitted(false);
         } else if (response.statusCode === 1002 || 1000) {
           toast.error(response.description, {

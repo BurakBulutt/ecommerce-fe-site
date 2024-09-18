@@ -15,19 +15,19 @@ const Basket = (props) => {
   const { basket, setBasket } = useContext(BasketContext);
   const service = new BasketService();
   const navigator = useNavigate();
-  const defaultImage = "https://png.pngtree.com/png-clipart/20191120/original/pngtree-cancel-cart-product-icon-png-image_5060873.jpg";
+  const defaultImage =
+    "https://png.pngtree.com/png-clipart/20191120/original/pngtree-cancel-cart-product-icon-png-image_5060873.jpg";
 
   const openCheckout = () => {
-    if(basket?.basketProducts.length >= 1) {
+    if (basket?.basketProducts.length >= 1) {
       props.openCloseBasket(false);
       navigator(`/checkout`);
-    }else {
-      toast.info("Sepette Ürün Bulunmamaktadır",{
-        position : 'top-left',
-        autoClose : 3000
-      })
+    } else {
+      toast.info("Sepette Ürün Bulunmamaktadır", {
+        position: "top-left",
+        autoClose: 3000,
+      });
     }
-
   };
 
   const deleteBasketProduct = (basketProductId) => {
@@ -84,63 +84,73 @@ const Basket = (props) => {
                       </button>
                     </div>
                   </div>
+                  {basket?.basketProducts?.map((basketProduct) => (
+                    <div
+                      key={basketProduct.id}
+                      className="grid grid-cols-12 gap-4 font-normal text-gray-700 text-sm border-t border-t-border-default pt-5"
+                    >
+                      <div className="col-span-3">
+                        <img
+                          alt=""
+                          src={
+                            basketProduct.product?.image
+                              ? basketProduct.product?.image
+                              : defaultImage
+                          }
+                          className="h-full w-full object-contain bg-transparent"
+                        />
+                      </div>
+                      <div className="col-span-9 space-y-2">
+                        <div className="flex flex-row justify-between items-start font-semibold text-gray-900 px-4">
+                          <h3>
+                            <p>{basketProduct.product?.name}</p>
+                          </h3>
+                          <p className="text-gray-500">
+                            {basketProduct.quantity} Adet
+                          </p>
+                        </div>
 
-                  <div className="mt-8">
-                    <div className="flow-root">
-                      <ul
-                        role="list"
-                        className="-my-6 divide-y divide-gray-200"
-                      >
-                        {basket?.basketProducts?.map((basketProduct) => (
-                          <li key={basketProduct.id} className="flex py-6">
-                            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md bg-transparent">
-                              <img
-                                alt=""
-                                src={
-                                  basketProduct.product?.image
-                                    ? basketProduct.product?.image
-                                    : defaultImage
-                                }
-                                className="h-full w-full object-contain bg-transparent"
-                              />
-                            </div>
+                        <div className="flex flex-col justify-between px-4">
+                          {basketProduct.product?.originalPrice !==
+                          basketProduct.product?.priceAfterDiscount ? (
+                            <>
+                              <span className="text-sm text-gray-500 line-through font-normal">
+                                TRY{" "}
+                                {basketProduct.product?.originalPrice.toLocaleString(
+                                  "tr-TR"
+                                )}
+                              </span>
+                              <span className="text-sm font-bold">
+                                TRY{" "}
+                                {basketProduct.product?.priceAfterDiscount.toLocaleString(
+                                  "tr-TR"
+                                )}
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-sm font-bold">
+                              TRY{" "}
+                              {basketProduct.product?.originalPrice.toLocaleString(
+                                "tr-TR"
+                              )}
+                            </span>
+                          )}
 
-                            <div className="ml-4 flex flex-1 flex-col">
-                              <div>
-                                <div className="flex justify-between text-base font-medium text-gray-900">
-                                  <h3>
-                                    <p>{basketProduct.product?.name}</p>
-                                  </h3>
-                                  <p className="ml-4">
-                                    {basketProduct.product?.price.toLocaleString(
-                                      "tr-TR"
-                                    )}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="flex flex-1 items-end justify-between text-sm">
-                                <p className="text-gray-500">
-                                  Adet {basketProduct.quantity}
-                                </p>
-
-                                <div className="flex">
-                                  <button
-                                    type="button"
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                    onClick={() => {
-                                      deleteBasketProduct(basketProduct.id);
-                                    }}
-                                  >
-                                    Sil
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
+                          <div className="flex gap-2 py-2">
+                            <button
+                              type="button"
+                              className="font-medium text-indigo-600 hover:text-indigo-500"
+                              onClick={() => {
+                                deleteBasketProduct(basketProduct.id);
+                              }}
+                            >
+                              Sil
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">

@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { OrderService } from "../../../services/orderservice/OrderService";
 import { HiArrowRight } from "react-icons/hi";
 import Paginator from "../../product/paginator";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const OrderList = () => {
   const [orderPage, setOrderPage] = useState();
   const [orders, setOrders] = useState([]);
   const service = new OrderService();
-  const [orderItemsCount, setOrderItemsCount] = useState(1);
   const [totalElement, setTotalElement] = useState(0);
   const pageSize = 7;
   const [currentPage, setCurrentPage] = useState(0);
@@ -43,12 +42,6 @@ const OrderList = () => {
       setOrders(orderPage.content);
     }
   },[orderPage])
-
-  useEffect(()=> {
-    if(orders){
-      setOrderItemsCount(orders.length)
-    }
-  },[orders])
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -103,7 +96,7 @@ const OrderList = () => {
                           <p className="text-blue-500 ml-3">({order.code})</p>
                         </div>
                         <p className="text-xs md:text-sm leading-none text-gray-600 mt-2">
-                          {orderItemsCount} Ürün
+                          {order.orderItems.length} Ürün
                         </p>
                       </div>
                     </div>
