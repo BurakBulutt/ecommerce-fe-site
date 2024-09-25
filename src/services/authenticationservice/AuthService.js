@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const URL = "auth";
+const API_BASE = "http://localhost:8080/";
+const URL = `${API_BASE}auth`;
 
 export class AuthService {
   async login(data) {

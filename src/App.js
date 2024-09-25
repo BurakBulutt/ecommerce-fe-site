@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Shop from "./components/shop";
 import Slider from "./components/home/slider/slider";
 import ProductPage from "./components/product/product-page";
-import { BasketProvider } from "./components/context/BasketContext";
+import { ApplicationContextProvider } from "./components/context/ApplicationContext";
 import Checkout from "./components/checkout";
 import OrderList from "./components/order/orderlist";
 import OrderSummary from "./components/order/ordersummary";
@@ -29,7 +29,7 @@ const Layout = () => {
 
 const App = () => {
   return (
-    <BasketProvider>
+    <ApplicationContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Slider />} />
@@ -47,7 +47,7 @@ const App = () => {
       </Routes>
       <Notifications />
       <ToastContainer />
-    </BasketProvider>
+    </ApplicationContextProvider>
   );
 };
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import slider1 from "../../../assets/images/slider1.jpg";
-import slider2 from "../../../assets/images/slider2.png";
-import slider3 from "../../../assets/images/slider3.png";
-import { FaShoppingCart } from "react-icons/fa"; // react-icons'dan shop ikonu
+import slider1 from "../../../assets/images/slider1.png";
+import slider2 from "../../../assets/images/slider2.jpg";
+import slider3 from "../../../assets/images/slider3.jpg";
+import { FaShoppingCart } from "react-icons/fa";
+import logo from "../../../assets/logo1.svg"
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -40,16 +41,6 @@ const Home = () => {
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      <div className="border-y border-border-default w-full hidden lg:block">
-        <div className="container m-auto !w-full">
-          <a
-            className="lg:flex lg:justify-center lg:h-fit item gap-8 py-3"
-            href="/shop"
-          >
-            <span className="text-xs font-medium- uppercase">Mağaza</span>
-          </a>
-        </div>
-      </div>
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -58,7 +49,7 @@ const Home = () => {
           <div
             key={index}
             className="w-full flex-shrink-0 relative"
-            style={{ height: "100vh" }} // 100vh ile slider tam ekran olacak
+            style={{ height: "100vh" }}
           >
             <img
               src={image}
@@ -68,13 +59,13 @@ const Home = () => {
             {/* Orta kısma eklenen büyük dörtgen */}
             <div className="absolute inset-0 flex justify-center items-center">
               <div
-                className="bg-black bg-opacity-75 p-16 rounded-lg shadow-lg text-center cursor-pointer"
+                className="bg-white bg-opacity-40 p-16 rounded-lg shadow-lg text-center cursor-pointer"
                 onClick={() => navigateShop()}
               >
                 <div className="flex flex-col items-center justify-center">
-                  <FaShoppingCart className="text-8xl text-white mb-6 opacity-75" />{" "}
-                  {/* Shop ikonu büyütüldü ve opaklık uygulandı */}
-                  <h2 className="text-6xl font-bold text-white uppercase opacity-75 font-serif">
+                <img src={logo} alt="" className="w-32 h-32 mb-6 opacity-70" /> {/* Logo yerine SVG kullanıldı */}
+                {/* Shop ikonu büyütüldü ve opaklık uygulandı */}
+                  <h2 className="text-6xl font-bold text-[#3B82F6] uppercase opacity-70 font-serif">
                     Alışverişe Başla
                   </h2>
                 </div>

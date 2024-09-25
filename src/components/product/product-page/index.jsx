@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ProductService } from "../../../services/productservice/ProductService";
 import { toast } from "react-toastify";
 import Quantity from "../quantity";
-import { BasketContext } from "../../context/BasketContext";
+import { ApplicationContext } from "../../context/ApplicationContext";
 import { BasketService } from "../../../services/basketservice/BasketService";
 import { FavoriteProductService } from "../../../services/favoriteproductservice/FavoriteProductService";
 
@@ -13,8 +13,7 @@ const ProductPage = () => {
   const service = new ProductService();
   const [quantity, setQuantity] = useState(1);
   const basketService = new BasketService();
-  const { setBasket } = useContext(BasketContext);
-  const { token } = useContext(BasketContext);
+  const { setBasket,token} = useContext(ApplicationContext);
   const defaultImage =
     "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg";
   const favoriteProductService = new FavoriteProductService();
@@ -74,7 +73,7 @@ const ProductPage = () => {
           });
         } else {
           setFavorite(null);
-          toast.error(`${response.description} -> Ürün Favorilerden Kaldırıldı`, {
+          toast.success(`${response.description} -> Ürün Favorilerden Kaldırıldı`, {
             position: "top-left",
             autoClose: 3000,
           });

@@ -1,7 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const URL = "products";
+const API_BASE = "http://localhost:8080/";
+const URL = `${API_BASE}products`;
 
 export class ProductService {
   async productFilter(params) {
@@ -25,7 +26,7 @@ export class ProductService {
 
   async getAll() {
     try {
-      const req = await axios.get(`/${URL}`, {
+      const req = await axios.get(`${URL}`, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -40,9 +41,28 @@ export class ProductService {
     }
   }
 
+
+  async searchFilter(params) {
+    try {
+      const req = await axios.get(`${URL}/search-filter`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        params : params
+      });
+      const response = req.data;
+
+      return response;
+    } catch (error) {
+      console.error("Error making API request:", error);
+
+      throw error;
+    }
+  }
+
   async getBySlug(slug) {
     try {
-      const req = await axios.get(`slug/${slug}`, {
+      const req = await axios.get(`${URL}/slug/${slug}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`,

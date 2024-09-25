@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../../assets/logo.svg";
+import Logo from "../../../assets/logo1.svg";
 import "../auth.css";
 import { AuthService } from "../../../services/authenticationservice/AuthService";
 import { useFormik } from "formik";

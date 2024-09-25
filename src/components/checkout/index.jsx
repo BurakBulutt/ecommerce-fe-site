@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { BasketContext } from "../context/BasketContext";
+import { ApplicationContext } from "../context/ApplicationContext";
 import { PaymentService } from "../../services/paymentservice/PaymentService";
 import { useFormik } from "formik";
 import { PaymentRequestSchema } from "../../utilities/ValidationSchema";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { BasketService } from "../../services/basketservice/BasketService";
 
 const Checkout = () => {
-  const { basket, setBasket } = useContext(BasketContext);
+  const { basket, setBasket } = useContext(ApplicationContext);
   const [submitted, setSubmitted] = useState(false);
   const service = new PaymentService();
   const basketService = new BasketService();

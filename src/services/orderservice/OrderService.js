@@ -1,12 +1,13 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const URL = "orders";
+const API_BASE = "http://localhost:8080/";
+const URL = `${API_BASE}orders`;
 
 export class OrderService {
   async getUserOrders(params) {
     try {
-      const req = await axios.get(`/${URL}/my-orders`, {
+      const req = await axios.get(`${URL}/my-orders`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`
@@ -26,7 +27,7 @@ export class OrderService {
 
   async getByCode(code) {
     try {
-      const req = await axios.get(`/${URL}/${code}`, {
+      const req = await axios.get(`${URL}/${code}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`

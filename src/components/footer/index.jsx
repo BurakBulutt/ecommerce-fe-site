@@ -7,8 +7,8 @@ const Footer = () => {
         <div className="flex flex-col items-center md:flex-row md:justify-between">
           {/* Sol Kısım: Şirket İsmi */}
           <div className="text-center md:text-left">
-            <h1 className="text-2xl font-bold">Fenerbahçe</h1>
-            <p className="mt-1 text-gray-400">© 2024 Fenerbahçe. Tüm Hakları Saklıdır.</p>
+            <h1 className="text-2xl font-bold">Deneme</h1>
+            <p className="mt-1 text-gray-400">© 2024 React-App. Tüm Hakları Saklıdır.</p>
           </div>
 
           {/* Orta Kısım: Sosyal Medya İkonları */}
@@ -29,7 +29,7 @@ const Footer = () => {
 
           {/* Sağ Kısım: İletişim Bilgileri */}
           <div className="mt-4 md:mt-0 text-center md:text-right">
-            <p className="text-gray-400">İletişim: info@şirket.com</p>
+            <p className="text-gray-400">İletişim: info@sirket.com</p>
             <p className="text-gray-400">Adres: Örnek Mah. 123, Şehir, Ülke</p>
           </div>
         </div>

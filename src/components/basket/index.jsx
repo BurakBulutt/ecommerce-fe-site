@@ -6,13 +6,13 @@ import {
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { BasketContext } from "../context/BasketContext";
+import { ApplicationContext } from "../context/ApplicationContext";
 import { BasketService } from "../../services/basketservice/BasketService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Basket = (props) => {
-  const { basket, setBasket } = useContext(BasketContext);
+  const { basket, setBasket } = useContext(ApplicationContext);
   const service = new BasketService();
   const navigator = useNavigate();
   const defaultImage =

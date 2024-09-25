@@ -4,6 +4,7 @@ import { HiArrowRight } from "react-icons/hi";
 import Paginator from "../../product/paginator";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import classNames from "classnames";
 
 const OrderList = () => {
   const [orderPage, setOrderPage] = useState();
@@ -28,7 +29,7 @@ const OrderList = () => {
         if (response.statusCode === 200) {
           setOrderPage(response.data.items);
           setTotalElement(response.data.items.totalElements);
-        }else {
+        } else {
           toast.error(response.description, {
             position: "top-left",
             autoClose: 3000,
@@ -37,19 +38,19 @@ const OrderList = () => {
       });
   };
 
-  useEffect(()=> {
-    if(orderPage){
+  useEffect(() => {
+    if (orderPage) {
       setOrders(orderPage.content);
     }
-  },[orderPage])
+  }, [orderPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
   const routeSummary = (code) => {
-    navigator(`${code}`)
-  }
+    navigator(`${code}`);
+  };
 
   const getColorByStatus = (status) => {
     switch (status) {
@@ -64,6 +65,37 @@ const OrderList = () => {
       default:
         throw console.error("UNKNOWN VALUE");
     }
+  };
+
+  const getOrderStringByStatus = (status) => {
+    switch (status) {
+      case "SIPARIS_ALINDI":
+        return "Sipariş Alındı";
+      case "HAZIRLANIYOR":
+        return "Hazırlanıyor";
+      case "KARGOYA_VERILDI":
+        return "Kargoya Verildi";
+      case "TESLIM_EDILDI":
+        return "Teslim Edildi";
+      default:
+        console.error("UNKNOWN VALUE");
+    }
+  };
+
+  const status = (order) => {
+    const statusColor = getColorByStatus(order.status);
+    const statusStr = getOrderStringByStatus(order.status);
+
+    return (
+      <div
+      className={classNames(
+        "flex items-center justify-between px-2 py-1 mt-2 rounded-full bg-blue-700"
+      )}      >
+        <p className={`text-xs leading-3 text-white`}>
+          {statusStr}
+        </p>
+      </div>
+    );
   };
 
   return (
@@ -93,7 +125,7 @@ const OrderList = () => {
                           <p className="font-semibold text-gray-800">
                             Sipariş Tarihi : {order.shipmentDate}
                           </p>
-                          <p className="text-blue-500 ml-3">({order.code})</p>
+                          <p className="text-blue-700 ml-3">({order.code})</p>
                         </div>
                         <p className="text-xs md:text-sm leading-none text-gray-600 mt-2">
                           {order.orderItems.length} Ürün
@@ -105,29 +137,19 @@ const OrderList = () => {
                     <div className="flex justify-between items-center">
                       {/* Sipariş Tutarı */}
                       <div>
-                        <p className="text-sm font-semibold leading-none text-right text-gray-800">
+                        <p className="text-sm font-semibold leading-none text-center text-gray-800">
                           TRY {order.amount.toLocaleString("tr-TR")}
                         </p>
-                        <div
-                          className={`flex items-center justify-center px-2 py-1 mt-2 bg-${getColorByStatus(
-                            order.status
-                          )}-100 rounded-full`}
-                        >
-                          <p
-                            className={`text-xs leading-3 text-${getColorByStatus(
-                              order.status
-                            )}-700`}
-                          >
-                            {order.status}
-                          </p>
-                        </div>
+                        {status(order)}
                       </div>
 
                       {/* Yönlendirme Butonu */}
                       <button
-                        className="ml-4 p-2 rounded-full bg-blue-500 hover:bg-blue-700 transition duration-200"
+                        className="ml-4 p-2 rounded-full bg-blue-700 hover:bg-blue-700 transition duration-200"
                         style={{ display: "flex", alignItems: "center" }}
-                        onClick={()=> {routeSummary(order.code)}}
+                        onClick={() => {
+                          routeSummary(order.code);
+                        }}
                       >
                         <HiArrowRight className="text-white text-2xl" />
                       </button>

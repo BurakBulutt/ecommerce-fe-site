@@ -1,12 +1,13 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const URL = "baskets";
+const API_BASE = "http://localhost:8080/";
+const URL = `${API_BASE}baskets`;
 
 export class BasketService {
   async getBasket() {
     try {
-      const req = await axios.get(`/${URL}`, {
+      const req = await axios.get(`${URL}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`,
@@ -24,7 +25,7 @@ export class BasketService {
 
   async addProduct(request) {
     try {
-      const req = await axios.post(`/${URL}/add-product`, request, {
+      const req = await axios.post(`${URL}/add-product`, request, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`,
@@ -42,7 +43,7 @@ export class BasketService {
 
   async updateQuantity(request) {
     try {
-      const req = await axios.post(`/${URL}/update-quantity`, request, {
+      const req = await axios.post(`${URL}/update-quantity`, request, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`,
@@ -60,7 +61,7 @@ export class BasketService {
 
   async deleteBasketProduct(id) {
     try {
-      const req = await axios.delete(`/${URL}/delete-basketProduct/${id}`, {
+      const req = await axios.delete(`${URL}/delete-basketProduct/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`,
@@ -78,7 +79,7 @@ export class BasketService {
 
   async clearBasket() {
     try {
-      const req = await axios.delete(`/${URL}`, {
+      const req = await axios.delete(`${URL}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${Cookies.get("token")}`,

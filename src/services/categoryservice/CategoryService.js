@@ -1,7 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const URL = "categories";
+const API_BASE = "http://localhost:8080/";
+const URL = `${API_BASE}categories`;
 
 export class CategoryService {
   async getCategoryTree() {

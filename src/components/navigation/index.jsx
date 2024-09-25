@@ -1,23 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo1.svg"
 import Cookies from "js-cookie";
 import { useContext, useEffect, useState } from "react";
 import { ProductService } from "../../services/productservice/ProductService";
-import { toast } from "react-toastify";
 import Basket from "../basket";
-import { BasketContext } from "../context/BasketContext";
+import { ApplicationContext } from "../context/ApplicationContext";
 
 const Navigation = () => {
   const [loginState, setLoginState] = useState(false);
-  const {token} = useContext(BasketContext)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigator = useNavigate();
-  const [products, setProducts] = useState([]);
   const productService = new ProductService();
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [basketVisibility, setBasketVisibility] = useState(false);
-  const { basket } = useContext(BasketContext);
+  const { basket,token} = useContext(ApplicationContext);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -29,23 +26,6 @@ const Navigation = () => {
     }
   }, [token]);
 
-  useEffect(() => {
-    getItems();
-  }, []);
-
-  const getItems = () => {
-    productService.getAll().then((response) => {
-      if (response.statusCode === 200) {
-        setProducts(response.data.items);
-      } else {
-        toast.error(response.description, {
-          position: "top-left",
-          autoClose: 3000,
-        });
-      }
-    });
-  };
-
   const onUserClickHandler = () => {
     Cookies.remove("token");
     setLoginState(false);
@@ -53,14 +33,20 @@ const Navigation = () => {
   };
 
   const onChangeHandler = (e) => {
-    const filtr = products.content.filter((product) =>
-      product.name?.toLowerCase().includes(e.target.value)
-    );
-    setSearchedProducts(filtr.slice(0, 6));
+    const params = {
+      key : e.target.value,
+      page : 0,
+      size : 5
+    }
+    productService.searchFilter(params).then((response) => {
+      if (response.statusCode === 200) {
+        console.log(response.data.items)
+        setSearchedProducts(response.data?.items?.content);
+      }
+    });
   };
 
   const getProduct = (product) => {
-    console.log("Navigate Haydi");
     navigator(`/products/${product.slug}`);
     window.location.reload();
   };
@@ -77,7 +63,7 @@ const Navigation = () => {
           <img
             src={logo}
             alt="Logo"
-            className="h-16 max-w-full transition-transform duration-300 ease-in-out hover:scale-110"
+            className="h-16 max-w-full transition-transform duration-300 ease-in-out hover:scale-110 p-2"
             style={{ maxHeight: "8rem" }}
           />
         </Link>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import Logo from "../../../assets/logo.svg";
+import Logo from "../../../assets/logo1.svg";
 import "../auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -7,13 +7,13 @@ import { LoginRequestSchema } from "../../../utilities/ValidationSchema";
 import { AuthService } from "../../../services/authenticationservice/AuthService";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { BasketContext } from "../../context/BasketContext";
+import { ApplicationContext } from "../../context/ApplicationContext";
 
 const Login = () => {
   const service = new AuthService();
   const navigator = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-  const { setToken } = useContext(BasketContext);
+  const { setToken } = useContext(ApplicationContext);
 
   const baseItem = {
     username: "",

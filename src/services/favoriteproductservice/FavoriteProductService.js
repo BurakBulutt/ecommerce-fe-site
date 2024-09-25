@@ -1,12 +1,13 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const URL = "favorite-products";
+const API_BASE = "http://localhost:8080/";
+const URL = `${API_BASE}favorite-products`;
 
 export class FavoriteProductService {
     async checkFavorite(id) {
         try {
-          const req = await axios.get(`/${URL}/check-favorite/${id}`, {
+          const req = await axios.get(`${URL}/check-favorite/${id}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: `${Cookies.get("token")}`,
@@ -24,7 +25,7 @@ export class FavoriteProductService {
 
       async deleteFavorite(id) {
         try {
-          const req = await axios.delete(`/${URL}/${id}`, {
+          const req = await axios.delete(`${URL}/${id}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: `${Cookies.get("token")}`,
@@ -42,7 +43,7 @@ export class FavoriteProductService {
 
       async save(request) {
         try {
-          const req = await axios.post(`/${URL}`, request,{
+          const req = await axios.post(`${URL}`, request,{
             headers: {
               "Content-Type": "application/json",
               Authorization: `${Cookies.get("token")}`,
