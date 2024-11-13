@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { ProductService } from "../../../services/productservice/ProductService";
 import { toast } from "react-toastify";
 import Quantity from "../quantity";
-import { ApplicationContext } from "../../context/ApplicationContext";
 import { BasketService } from "../../../services/basketservice/BasketService";
 import { FavoriteProductService } from "../../../services/favoriteproductservice/FavoriteProductService";
+import { ApplicationContext } from "../../../context/ApplicationContext";
 
 const ProductPage = () => {
   const { id } = useParams();

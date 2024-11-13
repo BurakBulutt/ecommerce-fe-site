@@ -1,9 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { BasketService } from "../../services/basketservice/BasketService";
+import { BasketService } from "../services/basketservice/BasketService";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { NotificationManager } from "../../services/websocketservice/NotificationManager";
-import { WebSocketService } from "../../services/websocketservice/WebSocketService";
+import { NotificationManager } from "../services/websocketservice/NotificationManager";
+import { WebSocketService } from "../services/websocketservice/WebSocketService";
 
 export const ApplicationContext = createContext();
 

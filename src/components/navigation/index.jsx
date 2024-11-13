@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 import { useContext, useEffect, useState } from "react";
 import { ProductService } from "../../services/productservice/ProductService";
 import Basket from "../basket";
-import { ApplicationContext } from "../context/ApplicationContext";
+import { ApplicationContext } from "../../context/ApplicationContext";
+
 
 const Navigation = () => {
   const [loginState, setLoginState] = useState(false);

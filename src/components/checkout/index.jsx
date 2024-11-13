@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { ApplicationContext } from "../context/ApplicationContext";
 import { PaymentService } from "../../services/paymentservice/PaymentService";
 import { useFormik } from "formik";
 import { PaymentRequestSchema } from "../../utilities/ValidationSchema";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BasketService } from "../../services/basketservice/BasketService";
+import { ApplicationContext } from "../../context/ApplicationContext";
 
 const Checkout = () => {
   const { basket, setBasket } = useContext(ApplicationContext);

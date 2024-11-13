@@ -9,11 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Shop from "./components/shop";
 import Slider from "./components/home/slider/slider";
 import ProductPage from "./components/product/product-page";
-import { ApplicationContextProvider } from "./components/context/ApplicationContext";
 import Checkout from "./components/checkout";
 import OrderList from "./components/order/orderlist";
 import OrderSummary from "./components/order/ordersummary";
 import { Notifications } from "react-push-notification";
+import { ApplicationContextProvider } from "./context/ApplicationContext";
 
 const Layout = () => {
   return (
